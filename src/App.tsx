@@ -56,7 +56,8 @@ function reducer(state: State, action: Action): State {
     let newGameButtonDisabled = true;
 
     if (isCorrect) {
-      feedback = `${guess} is correct`;
+      const scorePercent = ((trialsLeft / 10) * 100).toFixed(0);
+      feedback = `${guess} is correct with ${scorePercent}%`;
       inputReadOnly = true;
       guessBtnDisabled = true;
       newGameButtonDisabled = false;
@@ -106,55 +107,64 @@ function App() {
   return (
     <>
       <div className="container">
-        <Typography
-          variant="h3"
-          style={{ marginBottom: "2rem", textTransform: "uppercase" }}
-        >
-          Guess a number between 0 and 100
-        </Typography>
-        <Typography variant="h6">{state.numTrial} Trials Remaining</Typography>
-
-        <input
-          type="number"
-          value={state.playerGuess}
-          placeholder="00"
-          onChange={(e) =>
-            dispatch({ type: "SET_GAME", payload: e.target.value })
-          }
-          readOnly={state.inputReadOnly}
-          style={{
-            fontSize: "2rem",
-            textAlign: "center",
-            width: "10rem",
-            padding: "1rem",
-          }}
-        />
-        <Typography
-          variant="h6"
-          style={{ marginTop: "2rem", fontWeight: "bold" }}
-        >
-          {state.feedback}
-        </Typography>
-
-        <Stack direction="row" justifyContent="center" mt={3} spacing={2}>
-          <Button
-            variant="contained"
-            color="success"
-            onClick={() => dispatch({ type: "MAKE_GUESS" })}
-            disabled={state.guessBtnDisabled}
+        <div className="game-content">
+          <Typography
+            variant="h3"
+            fontSize={22}
+            style={{
+              fontFamily: "inherit",
+              marginBottom: "2rem",
+              textTransform: "uppercase",
+            }}
           >
-            Guess
-          </Button>
+            Guess a number between 0 and 100
+          </Typography>
+          <Typography sx={{ mb: "2rem", fontFamily: "inherit" }} variant="h6">
+            {state.numTrial} Trials Remaining
+          </Typography>
 
-          <Button
-            variant="outlined"
-            color="secondary"
-            onClick={() => dispatch({ type: "NEW_GAME" })}
-            disabled={state.newGameButtonDisabled}
+          <input
+            type="number"
+            value={state.playerGuess}
+            placeholder="00"
+            onChange={(e) =>
+              dispatch({ type: "SET_GAME", payload: e.target.value })
+            }
+            readOnly={state.inputReadOnly}
+            style={{
+              fontSize: "2rem",
+              textAlign: "center",
+              width: "10rem",
+              padding: "1rem",
+            }}
+          />
+          <Typography
+            variant="h6"
+            style={{ marginTop: "2rem", fontWeight: "bold" }}
           >
-            New Game
-          </Button>
-        </Stack>
+            {state.feedback}
+          </Typography>
+
+          <Stack direction="row" justifyContent="center" mt={3} spacing={2}>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => dispatch({ type: "MAKE_GUESS" })}
+              disabled={state.guessBtnDisabled}
+            >
+              Guess
+            </Button>
+
+            <Button
+              variant="outlined"
+              color="secondary"
+              onClick={() => dispatch({ type: "NEW_GAME" })}
+              disabled={state.newGameButtonDisabled}
+            >
+              New Game
+            </Button>
+          </Stack>
+        </div>
       </div>
     </>
   );

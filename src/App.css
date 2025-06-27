@@ -1,20 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Press Start 2P", system-ui;
 }
 
 body,
 html {
   height: 100%;
   margin: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: #fff;
 }
 
 ::selection {
-  background-color: rgb(68, 68, 210);
-  color: white;
+  background-color: #5cd;
+  color: black;
 }
 
 .container {
@@ -22,8 +24,18 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   text-align: center;
+  height: 100vh;
+}
+
+.game-content {
+  max-width: 50rem;
+  margin: 3rem auto;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 1rem;
+  box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.1);
+  background-color: white;
 }
 
 button {
