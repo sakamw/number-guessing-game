@@ -27,6 +27,8 @@ const initialState: State = {
   newGameButtonDisabled: false,
 };
 
+const secret = () => Math.floor(Math.random() * 100);
+
 function reducer(state: State, action: Action): State {
   if (action.type === "SET_GAME") {
     return { ...state, playerGuess: action.payload };
@@ -86,7 +88,7 @@ function reducer(state: State, action: Action): State {
   if (action.type === "NEW_GAME") {
     return {
       ...initialState,
-      secretNumber: Math.floor(Math.random() * 100),
+      secretNumber: secret(),
       inputReadOnly: false,
       guessBtnDisabled: false,
       newGameButtonDisabled: true,
@@ -101,7 +103,7 @@ function reducer(state: State, action: Action): State {
 function App() {
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
-    secretNumber: Math.floor(Math.random() * 100),
+    secretNumber: secret(),
   });
 
   return (
